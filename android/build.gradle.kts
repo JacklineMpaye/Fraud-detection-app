@@ -1,3 +1,16 @@
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -5,15 +18,14 @@ allprojects {
     }
 }
 
-val newBuildDir = rootProject.layout.buildDirectory.dir("../../build")
-rootProject.layout.buildDirectory.set(newBuildDir)
-
+rootProject.buildDir = '../build'
 subprojects {
-    val newSubprojectBuildDir = newBuildDir.map { it.dir(project.name) }
-    project.layout.buildDirectory.set(newSubprojectBuildDir)
-    project.evaluationDependsOn(":app")
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
 }
 
-tasks.register<Delete>("clean") {
-    delete(rootProject.layout.buildDirectory)
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
