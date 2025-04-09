@@ -1,9 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fraud_dashboard/services/auth_service.dart';
 import 'package:fraud_dashboard/const.dart';
-import 'package:fraud_dashboard/register_page.dart';
+import 'package:flutter/foundation.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+  bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    if (kDebugMode) {
+      print('API Base URL: ${dotenv.env['API_URL']}');
+    }
+  }
+
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (kDebugMode) {
+      print('Attempting login with endpoint: ${dotenv.env['API_URL']}/api/login');
+    }
+
+    setState(() => _isLoading = true);
+    try {
+      final authData = await AuthService.login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      if (kDebugMode) {
+        print('Login successful! Token: ${authData['token']}');
+      }
+
+      Navigator.pushNamed(context, '/dashboard');
+    } catch (e) {
+      if (kDebugMode) {
+        print('Login error: $e');
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +63,7 @@ class LoginPage extends StatelessWidget {
       backgroundColor: const Color(0xFF171821),
       body: Row(
         children: [
-          // Left Side - Text Content
+          // Left Side (Marketing Content)
           Expanded(
             flex: 1,
             child: Container(
@@ -37,60 +89,26 @@ class LoginPage extends StatelessWidget {
                       height: 1.3,
                     ),
                   ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'AI-driven fraud detection, ensuring integrity and building customer confidence',
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(primaryColorCode),
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'Get Started',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
-
-          // Right Side - Login Form
+          // Right Side (Login Form)
           Expanded(
             flex: 1,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 40),
-              child: Center(
-                child: SingleChildScrollView(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 40),
+                child: Form(
+                  key: _formKey,
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         padding: const EdgeInsets.all(30),
                         decoration: BoxDecoration(
                           color: const Color(0xFF252732),
                           borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              blurRadius: 15,
-                              spreadRadius: 2,
-                            ),
-                          ],
                         ),
                         child: Column(
                           children: [
@@ -103,58 +121,72 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 30),
-                            _buildTextField(
-                              context,
-                              label: 'Email',
-                              icon: Icons.email,
+                            TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                labelText: 'Email',
+                                prefixIcon: Icon(Icons.email, color: Colors.grey),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 20),
-                            _buildTextField(
-                              context,
-                              label: 'Password',
-                              icon: Icons.lock,
-                              isPassword: true,
-                            ),
-                            const SizedBox(height: 25),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/dashboard');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(primaryColorCode),
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                            TextFormField(
+                              controller: _passwordController,
+                              obscureText: _obscurePassword,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscurePassword 
+                                      ? Icons.visibility_off 
+                                      : Icons.visibility,
+                                    color: Colors.grey,
                                   ),
-                                ),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  onPressed: () {
+                                    setState(() => _obscurePassword = !_obscurePassword);
+                                  },
                                 ),
                               ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 20),
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const RegisterPage(),
-                                  ),
-                                );
+                                // Navigate to the password recovery page
+                                Navigator.pushNamed(context, '/forgot-password');
                               },
                               child: const Text(
-                                'Don\'t have an account? Register',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
+                                'Forgot Password?',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                onPressed: _isLoading ? null : _login,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(primaryColorCode),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
+                                child: _isLoading
+                                    ? const CircularProgressIndicator(color: Colors.white)
+                                    : const Text('Login'),
                               ),
                             ),
                           ],
@@ -170,33 +202,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildTextField(
-    BuildContext context, {
-    required String label,
-    required IconData icon,
-    bool isPassword = false,
-  }) {
-    return TextFormField(
-      obscureText: isPassword,
-      style: const TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: const TextStyle(color: Colors.grey),
-        prefixIcon: Icon(icon, color: Colors.grey),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey[800]!),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(primaryColorCode)),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        filled: true,
-        fillColor: const Color(0xFF1F2029),
-      ),
-    );
-  }
 }
-
-

@@ -84,7 +84,8 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
       appBar: AppBar(
         title: const Text('Alert Management'),
       ),
-      body: Padding(
+      body: Container(
+        color: const Color(0xFF1F2029), 
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -8,42 +8,74 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF171821),
-      body: CustomScrollView(
-        slivers: [
-          // App Bar
-          SliverAppBar(
-            expandedHeight: 80,
-            floating: true,
-            pinned: true,
-            backgroundColor: Color(primaryColorCode),
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(left: 20, bottom: 16),
-              title: Row(
-                children: [
-                  Text(
-                    'FraudSense',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  _buildNavButton('Home', context),
-                  _buildNavButton('How it works', context),
-                  _buildNavButton('About us', context),
-                  _buildPrimaryButton('Get Started', context),
-                ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isSmallScreen = constraints.maxWidth < 800;
+          
+          return CustomScrollView(
+            slivers: [
+              // App Bar
+              SliverAppBar(
+                expandedHeight: isSmallScreen ? 120 : 80,
+                floating: true,
+                pinned: true,
+                backgroundColor: Color(primaryColorCode),
+                flexibleSpace: FlexibleSpaceBar(
+                  titlePadding: const EdgeInsets.only(left: 20, bottom: 16),
+                  title: isSmallScreen 
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'FraudSense',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                _buildNavButton('Home', context),
+                                _buildNavButton('How it works', context),
+                                _buildNavButton('About us', context),
+                                _buildPrimaryButton('Get Started', context),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Text(
+                            'FraudSense',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Spacer(),
+                          _buildNavButton('Home', context),
+                          _buildNavButton('How it works', context),
+                          _buildNavButton('About us', context),
+                          _buildPrimaryButton('Get Started', context),
+                        ],
+                      ),
+                ),
               ),
-            ),
-          ),
 
-          // Hero Section with Flutter Graphic
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+              // Hero Section with Flutter Graphic
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isSmallScreen ? 20 : 40,
+                    vertical: 40,
+                  ),
                   child: Column(
                     children: [
                       _buildCustomHeroGraphic(),
@@ -52,7 +84,7 @@ class LandingPage extends StatelessWidget {
                         'Build a fortress of trust around your financial transactions',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 36,
+                          fontSize: isSmallScreen ? 28 : 36,
                           fontWeight: FontWeight.bold,
                           height: 1.2,
                         ),
@@ -63,7 +95,7 @@ class LandingPage extends StatelessWidget {
                         'AI-driven fraud detection, ensuring integrity and building customer confidence',
                         style: TextStyle(
                           color: Colors.grey[300],
-                          fontSize: 18,
+                          fontSize: isSmallScreen ? 16 : 18,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -72,27 +104,27 @@ class LandingPage extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
 
-          // Features Section
-          SliverPadding(
-            padding: const EdgeInsets.all(40),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1.5,
+              // Features Section
+              SliverPadding(
+                padding: EdgeInsets.all(isSmallScreen ? 20 : 40),
+                sliver: SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isSmallScreen ? 1 : 3,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: isSmallScreen ? 1.8 : 1.5,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => _buildFeatureCard(context, index),
+                    childCount: 3,
+                  ),
+                ),
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => _buildFeatureCard(context, index),
-                childCount: 3,
-              ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
@@ -163,7 +195,6 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-
                 Text(
                   'FraudSense',
                   style: TextStyle(
@@ -183,14 +214,14 @@ class LandingPage extends StatelessWidget {
 
   Widget _buildNavButton(String text, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextButton(
         onPressed: () {},
         child: Text(
           text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
       ),
@@ -210,7 +241,7 @@ class LandingPage extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushNamed(context, '/register');
       },
       child: Text(
         text,
@@ -281,7 +312,3 @@ class LandingPage extends StatelessWidget {
     );
   }
 }
-
-
-
-

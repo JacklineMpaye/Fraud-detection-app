@@ -54,6 +54,8 @@ ios/Flutter/Flutter.podspec
 # Web related
 web/.dart_tool/
 
+echo ".env" >> .gitignore
+
 # Linux related
 linux/flutter/generated_plugin_registrant.cc
 

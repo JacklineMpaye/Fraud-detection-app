@@ -114,6 +114,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+
+  http: ^0.13.5
+  flutter_dotenv: ^5.0.2
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.5
   fl_chart: ^0.65.0
@@ -130,10 +133,16 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    
+    - assets/.env
 
   fonts:
     - family: IBMPlexSans
+   
+    - family: Roboto
       fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+      
         - asset: assets/fonts/IBMPlexSans-Bold.ttf
           weight: 900
         - asset: assets/fonts/IBMPlexSans-Bold.ttf

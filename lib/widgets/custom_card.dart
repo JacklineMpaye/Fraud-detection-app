@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fraud_dashboard/const.dart';
 
 class CustomCard extends StatelessWidget {
   final Widget child;

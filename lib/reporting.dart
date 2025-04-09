@@ -39,7 +39,7 @@ class _ReportingPageState extends State<ReportingPage> {
   // Generate a sample report
   Map<String, dynamic> generateReport() {
     return {
-      'title': 'System and Transaction Report',
+      'title': 'System and Transaction Report', 
       'systemCondition': {
         'status': 'Stable',
         'uptime': '99.9%',
@@ -64,10 +64,16 @@ class _ReportingPageState extends State<ReportingPage> {
   @override
   Widget build(BuildContext context) {
     final report = generateReport();
+    
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reporting and Trend Analysis'),
+        title: const Text('Reporting and Trend Analysis', style: TextStyle(
+    color: Colors.white,  // Set the color here
+  ),),
+        backgroundColor:
+            const Color(0xFF1F2029), // Slightly lighter than background
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         // Wrap the entire body in a SingleChildScrollView
@@ -83,7 +89,7 @@ class _ReportingPageState extends State<ReportingPage> {
                     decoration: const InputDecoration(labelText: 'Transaction Type'),
                     value: selectedTransactionType,
                     items: ['All', 'Successful', 'Flagged', 'Rejected']
-                        .map((type) => DropdownMenuItem(value: type, child: Text(type)))
+                        .map((type) => DropdownMenuItem(value: type, child: Text(type, style: TextStyle(color: Colors.white))))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
@@ -122,9 +128,9 @@ class _ReportingPageState extends State<ReportingPage> {
             ),
 
             // Chart Selection Section
-            const Text('Select Charts to Include:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text('Select Charts to Include:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
             CheckboxListTile(
-              title: const Text('Fraud Trends Over Time'),
+              title: const Text('Fraud Trends Over Time',style: TextStyle(color: Colors.white)),
               value: showFraudTrendsChart,
               onChanged: (value) {
                 setState(() {
@@ -133,7 +139,7 @@ class _ReportingPageState extends State<ReportingPage> {
               },
             ),
             CheckboxListTile(
-              title: const Text('High-Risk Areas'),
+              title: const Text('High-Risk Areas', style: TextStyle(color: Colors.white)),
               value: showHighRiskAreasChart,
               onChanged: (value) {
                 setState(() {
@@ -142,7 +148,7 @@ class _ReportingPageState extends State<ReportingPage> {
               },
             ),
             CheckboxListTile(
-              title: const Text('Transaction Status Distribution'),
+              title: const Text('Transaction Status Distribution', style: TextStyle(color: Colors.white)),
               value: showTransactionStatusChart,
               onChanged: (value) {
                 setState(() {
@@ -157,7 +163,7 @@ class _ReportingPageState extends State<ReportingPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Report Preview:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Report Preview:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple)),
                   const SizedBox(height: 10),
                   Card(
                     elevation: 5,
@@ -172,35 +178,34 @@ class _ReportingPageState extends State<ReportingPage> {
                             Center(
                               child: Text(
                                 report['title'],
-                                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
                               ),
                             ),
                             const SizedBox(height: 20),
 
                             // System Condition
-                            const Text('System Condition:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text('Status: ${report['systemCondition']['status']}'),
-                            Text('Uptime: ${report['systemCondition']['uptime']}'),
-                            Text('Alerts: ${report['systemCondition']['alerts']}'),
+                            const Text('System Condition:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+                            Text('Uptime: ${report['systemCondition']['uptime']}', style: TextStyle(color: Colors.black)),
+                            Text('Alerts: ${report['systemCondition']['alerts']}', style:  TextStyle(color: Colors.black)),
                             const SizedBox(height: 20),
 
                             // Transaction Analysis
-                            const Text('Transaction Analysis:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text('Total Transactions: ${report['transactionAnalysis']['totalTransactions']}'),
-                            Text('Flagged Transactions: ${report['transactionAnalysis']['flaggedTransactions']}'),
-                            Text('Successful Transactions: ${report['transactionAnalysis']['successfulTransactions']}'),
+                            const Text('Transaction Analysis:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+                            Text('Total Transactions: ${report['transactionAnalysis']['totalTransactions']}', style: const TextStyle(color: Colors.black)),
+                            Text('Flagged Transactions: ${report['transactionAnalysis']['flaggedTransactions']}', style: const TextStyle(color: Colors.black)),
+                            Text('Successful Transactions: ${report['transactionAnalysis']['successfulTransactions']}', style: const TextStyle(color: Colors.black)),
                             const SizedBox(height: 20),
 
                             // Anomalies
-                            const Text('Anomalies:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text('Total Anomalies: ${report['anomalies']['totalAnomalies']}'),
-                            Text('Most Common Fraud Pattern: ${report['anomalies']['mostCommonFraudPattern']}'),
+                            const Text('Anomalies:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+                            Text('Total Anomalies: ${report['anomalies']['totalAnomalies']}', style: const TextStyle(color: Colors.black)),
+                            Text('Most Common Fraud Pattern: ${report['anomalies']['mostCommonFraudPattern']}', style: const TextStyle(color: Colors.black)),
                             const SizedBox(height: 20),
 
                             // Trends
-                            const Text('Trends:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text('Fraud Trend: ${report['trends']['fraudTrend']}'),
-                            Text('High-Risk Areas: ${report['trends']['highRiskAreas'].join(', ')}'),
+                            const Text('Trends:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+                            Text('Fraud Trend: ${report['trends']['fraudTrend']}', style: TextStyle(color: Colors.black)),
+                            Text('High-Risk Areas: ${report['trends']['highRiskAreas'].join(', ')}', style: TextStyle(color: Colors.black)),
                           ],
                         ),
                       ),
@@ -239,6 +244,7 @@ class _ReportingPageState extends State<ReportingPage> {
           ],
         ),
       ),
+      backgroundColor: const Color(0xFF1F2029), // Set your desired background color here
     );
   }
 }

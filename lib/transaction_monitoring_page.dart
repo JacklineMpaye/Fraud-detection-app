@@ -12,7 +12,9 @@ class TransactionMonitoringPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF171821), // Match dashboard background
       appBar: AppBar(
-        title: const Text('Transaction Monitoring'),
+        title: const Text('Transaction Monitoring', style: TextStyle(
+    color: Colors.white,  // Set the color here
+  ),),
         backgroundColor:
             const Color(0xFF1F2029), // Slightly lighter than background
         elevation: 0,
