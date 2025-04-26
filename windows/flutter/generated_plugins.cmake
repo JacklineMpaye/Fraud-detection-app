@@ -3,10 +3,13 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+<<<<<<< HEAD
   flutter_secure_storage_windows
   printing
   share_plus
   url_launcher_windows
+=======
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

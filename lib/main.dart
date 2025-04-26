@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+=======
+import 'package:flutter_dotenv/flutter_dotenv.dart'; // Add this import
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 import 'package:fraud_dashboard/dashboard.dart';
 import 'package:fraud_dashboard/login_page.dart';
 import 'package:fraud_dashboard/register_page.dart';
@@ -8,6 +12,7 @@ import 'package:fraud_dashboard/transaction_monitoring_page.dart';
 import 'package:fraud_dashboard/alert_management.dart';
 
 Future<void> main() async {
+<<<<<<< HEAD
   WidgetsFlutterBinding.ensureInitialized();
   
   try {
@@ -27,22 +32,46 @@ Future<void> main() async {
   }
 }
 
+=======
+  // Ensure Widgets binding is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Load environment variables
+   await dotenv.load(fileName: "assets/.env");  // Updated path
+  
+  
+  print("My API is at: ${dotenv.env['API_URL']}");
+  runApp(MyApp());
+}
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final apiUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:3000';
     
+=======
+    // Access API_URL anywhere in your app
+    final apiUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:3000';
+    debugPrint('API URL: $apiUrl'); // Verify in console
+
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
     return MaterialApp(
       title: 'FraudSense',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
+<<<<<<< HEAD
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.dark(
           primary: Colors.blueAccent,
           secondary: Colors.cyanAccent,
         ),
+=======
+      theme: ThemeData(
+        // ... (keep your existing theme data)
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
       ),
       initialRoute: '/',
       routes: {
@@ -55,6 +84,7 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+<<<<<<< HEAD
 }
 
 class InitializationErrorScreen extends StatelessWidget {
@@ -81,4 +111,6 @@ class InitializationErrorScreen extends StatelessWidget {
       ),
     );
   }
+=======
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 }

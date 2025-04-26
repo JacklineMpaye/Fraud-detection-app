@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+<<<<<<< HEAD
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -9,11 +10,19 @@ class AuthService {
   static final String _baseUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:3000';
 
   // Register new user (original working version)
+=======
+
+class AuthService {
+  static final String _baseUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:3000';
+
+  // Register new user
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
   static Future<Map<String, dynamic>> register({
     required String fullName,
     required String email,
     required String password,
   }) async {
+<<<<<<< HEAD
     final uri = Uri.parse('$_baseUrl/api/register');
     final body = {
       'fullName': fullName,
@@ -41,6 +50,19 @@ class AuthService {
         print('⏱️ [REGISTER] Time: ${stopwatch.elapsedMilliseconds}ms');
       }
 
+=======
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/api/register'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'fullName': fullName,
+          'email': email,
+          'password': password,
+        }),
+      );
+
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
       final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 201) {
@@ -53,6 +75,7 @@ class AuthService {
         throw responseData['error'] ?? 'Registration failed';
       }
     } catch (e) {
+<<<<<<< HEAD
       stopwatch.stop();
       if (kDebugMode) {
         print('❌ [REGISTER] Error: $e');
@@ -62,10 +85,18 @@ class AuthService {
   }
 
   // Login existing user (original working version)
+=======
+      throw 'Network error: $e';
+    }
+  }
+
+  // Login existing user
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
   static Future<Map<String, dynamic>> login({
     required String email,
     required String password,
   }) async {
+<<<<<<< HEAD
     final uri = Uri.parse('$_baseUrl/api/login');
     final body = {
       'email': email,
@@ -105,6 +136,21 @@ class AuthService {
           value: jsonEncode(responseData['user']),
         );
         
+=======
+    try {
+      final response = await http.post(
+        Uri.parse('$_baseUrl/api/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
         return {
           'success': true,
           'token': responseData['token'],
@@ -114,6 +160,7 @@ class AuthService {
         throw responseData['error'] ?? 'Login failed';
       }
     } catch (e) {
+<<<<<<< HEAD
       stopwatch.stop();
       if (kDebugMode) {
         print('❌ [LOGIN] Error: $e');
@@ -151,4 +198,9 @@ class AuthService {
     final userData = await _storage.read(key: 'user_data');
     return userData != null ? jsonDecode(userData) : null;
   }
+=======
+      throw 'Network error: $e';
+    }
+  }
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 }

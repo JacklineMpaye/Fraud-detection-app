@@ -68,6 +68,7 @@ macos/flutter/generated_plugin_registrant.cc
 # Xcode related
 xcuserdata/
 DerivedData/
+<<<<<<< HEAD
 node_modules
 
 # Flutter stuff
@@ -105,3 +106,5 @@ docker-compose.yml
 assets/.env.dev
 assets/.env.prod
 
+=======
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f

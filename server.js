@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 require('dotenv').config({ path: __dirname + '/.env' });
 
+=======
+require('dotenv').config();
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 
 
 
@@ -130,12 +134,15 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 app.get('/debug-env', (req, res) => {
     res.json({
         JWT_SECRET: process.env.JWT_SECRET,
         DB_USER: process.env.DB_USER,
     });
 });
+=======
+>>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
 
 // ======================
 // Server Start
