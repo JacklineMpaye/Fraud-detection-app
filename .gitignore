@@ -1,0 +1,107 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code related
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# iOS related
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_assets/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.podspec
+
+# Web related
+web/.dart_tool/
+
+echo ".env" >> .gitignore
+
+# Linux related
+linux/flutter/generated_plugin_registrant.cc
+
+# Windows related
+windows/flutter/generated_plugin_registrant.cc
+
+# macOS related
+macos/flutter/generated_plugin_registrant.cc
+
+# Xcode related
+xcuserdata/
+DerivedData/
+node_modules
+
+# Flutter stuff
+# Ignore Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+.dart_tool/
+.packages
+
+# Node.js stuff
+node_modules/
+
+# VS Code settings
+.vscode/
+
+# Environment files
+.env
+
+# Model and large data
+*.onnx
+*.h5
+
+*.pyd
+*.dll
+
+# Docker files (if not using anymore)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Env files
+
+assets/.env.dev
+assets/.env.prod
+

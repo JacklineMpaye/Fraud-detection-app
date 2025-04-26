@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+pandas
+numpy
+xgboost
+psycopg2-binary
+joblib
+kafka-python
+requests

@@ -1,0 +1,46 @@
+{
+    "info": {
+      "_postman_id": "...",
+      "name": "Fraud API Tests",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Health Check",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/health",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["health"]
+          }
+        }
+      },
+      {
+        "name": "Fraud Prediction",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"step\": 5,\n    \"type\": \"TRANSFER\",\n    \"amount\": 1000000,\n    \"nameOrig\": \"C12345\",\n    \"oldbalanceOrg\": 1000000,\n    \"newbalanceOrig\": 0,\n    \"nameDest\": \"C67890\",\n    \"oldbalanceDest\": 0,\n    \"newbalanceDest\": 1000000,\n    \"isFlaggedFraud\": 0\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/predict",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["predict"]
+          }
+        }
+      }
+    ]
+  }
