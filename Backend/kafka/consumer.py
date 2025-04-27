@@ -8,7 +8,7 @@ import psycopg2
 conn_postgres = psycopg2.connect(
     dbname="Fraudsense_DB",
     user="postgres",
-    password="256Tiwaj?",
+    password="yourpassword",
     host="localhost"
 )
 cursor = conn_postgres.cursor()
