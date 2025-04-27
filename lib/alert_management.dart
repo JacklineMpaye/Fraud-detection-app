@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// FraudAlert Model
 class FraudAlert {
   final String transactionId;
   final double amount;
@@ -36,17 +36,11 @@ class FraudAlert {
   }
 }
 
-
-
-=======
-import 'package:flutter/material.dart';
->>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
-
+// Alert Management Page
 class AlertManagementPage extends StatefulWidget {
   const AlertManagementPage({super.key});
 
   @override
-<<<<<<< HEAD
   State<AlertManagementPage> createState() => _AlertManagementPageState();
 }
 
@@ -56,8 +50,9 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
   final List<String> _alertTypes = ['All', 'Fraud Detected', 'Suspicious Activity'];
   final List<String> _statusTypes = ['All', 'Resolved', 'Unresolved'];
 
+  // 📡 Fetch Alerts from Backend
   Future<List<FraudAlert>> fetchAlerts() async {
-    final response = await http.get(Uri.parse('http://localhost:8000/alerts'));
+    final response = await http.get(Uri.parse('http://159.203.99.109:8000/alerts'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(response.body);
@@ -83,86 +78,11 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
     if (prob > 0.85) return Colors.red;
     if (prob > 0.7) return Colors.orange;
     return Colors.yellow;
-=======
-  _AlertManagementPageState createState() => _AlertManagementPageState();
-}
-
-class _AlertManagementPageState extends State<AlertManagementPage> {
-  // Filter states
-  String selectedAlertType = 'All';
-  String selectedAlertStatus = 'All';
-
-  // Example alert data (replace with real data from your backend)
-  final List<Map<String, String>> alerts = [
-    {
-      'id': '1',
-      'date': '12 May 2024',
-      'time': '04:49 PM',
-      'type': 'Flagged Transaction',
-      'status': 'Unresolved',
-      'description': 'Transaction flagged as potential phishing.',
-    },
-    {
-      'id': '2',
-      'date': '12 May 2024',
-      'time': '05:49 PM',
-      'type': 'System Warning',
-      'status': 'Resolved',
-      'description': 'High CPU usage detected.',
-    },
-    {
-      'id': '3',
-      'date': '13 May 2024',
-      'time': '06:49 PM',
-      'type': 'Flagged Transaction',
-      'status': 'Unresolved',
-      'description': 'Transaction flagged as potential identity theft.',
-    },
-    {
-      'id': '4',
-      'date': '14 May 2024',
-      'time': '07:49 PM',
-      'type': 'System Warning',
-      'status': 'Unresolved',
-      'description': 'Low disk space on server.',
-    },
-  ];
-
-  // Filtered alerts based on user selections
-  List<Map<String, String>> get filteredAlerts {
-    return alerts.where((alert) {
-      final matchesAlertType = selectedAlertType == 'All' || alert['type'] == selectedAlertType;
-      final matchesAlertStatus = selectedAlertStatus == 'All' || alert['status'] == selectedAlertStatus;
-      return matchesAlertType && matchesAlertStatus;
-    }).toList();
-  }
-
-  // Function to resolve an alert
-  void resolveAlert(String alertId) {
-    setState(() {
-      final alert = alerts.firstWhere((alert) => alert['id'] == alertId);
-      alert['status'] = 'Resolved';
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Alert resolved successfully!')),
-    );
-  }
-
-  // Function to dismiss an alert
-  void dismissAlert(String alertId) {
-    setState(() {
-      alerts.removeWhere((alert) => alert['id'] == alertId);
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Alert dismissed successfully!')),
-    );
->>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       backgroundColor: const Color(0xFF1F2029),
       appBar: AppBar(
         title: const Text('Fraud Alert Management'),
@@ -178,6 +98,7 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
       ),
       body: Column(
         children: [
+          // Filters
           Container(
             padding: const EdgeInsets.all(16),
             color: const Color(0xFF2D2F3D),
@@ -199,27 +120,6 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                         child: Text(type),
                       );
                     }).toList(),
-=======
-      appBar: AppBar(
-        title: const Text('Alert Management'),
-      ),
-      body: Container(
-        color: const Color(0xFF1F2029), 
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Filters Section
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(labelText: 'Alert Type'),
-                    value: selectedAlertType,
-                    items: ['All', 'Flagged Transaction', 'System Warning']
-                        .map((type) => DropdownMenuItem(value: type, child: Text(type)))
-                        .toList(),
->>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
                     onChanged: (value) {
                       setState(() {
                         selectedAlertType = value!;
@@ -229,7 +129,6 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-<<<<<<< HEAD
                   child: DropdownButtonFormField<String>(
                     dropdownColor: const Color(0xFF2D2F3D),
                     decoration: const InputDecoration(
@@ -245,14 +144,6 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                         child: Text(status),
                       );
                     }).toList(),
-=======
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(labelText: 'Alert Status'),
-                    value: selectedAlertStatus,
-                    items: ['All', 'Resolved', 'Unresolved']
-                        .map((status) => DropdownMenuItem(value: status, child: Text(status)))
-                        .toList(),
->>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
                     onChanged: (value) {
                       setState(() {
                         selectedAlertStatus = value!;
@@ -262,8 +153,8 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                 ),
               ],
             ),
-<<<<<<< HEAD
           ),
+          // Alert List
           Expanded(
             child: FutureBuilder<List<FraudAlert>>(
               future: fetchAlerts(),
@@ -295,7 +186,6 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                           ),
                         ),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(8),
                           onTap: () {
                             showDialog(
                               context: context,
@@ -333,52 +223,13 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      alert.alertType,
-                                      style: TextStyle(
-                                        color: alert.fraudProbability > 0.85 ? Colors.red : Colors.orange,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                      decoration: BoxDecoration(
-                                        color: alert.resolved ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.2),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Text(
-                                        alert.status,
-                                        style: TextStyle(
-                                          color: alert.resolved ? Colors.green : Colors.red,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                Text('Transaction ID: ${alert.transactionId}', style: const TextStyle(color: Colors.white70)),
+                                Text(alert.alertType, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                                 const SizedBox(height: 4),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.attach_money, size: 16, color: Colors.white70),
-                                    const SizedBox(width: 4),
-                                    Text('GHS${alert.amount.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white)),
-                                    const Spacer(),
-                                    const Icon(Icons.timelapse, size: 16, color: Colors.white70),
-                                    const SizedBox(width: 4),
-                                    Text(_formatDate(alert.timestamp), style: const TextStyle(color: Colors.white70)),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                LinearProgressIndicator(
-                                  value: alert.fraudProbability,
-                                  backgroundColor: Colors.grey[800],
-                                  color: _getProbabilityColor(alert.fraudProbability),
-                                ),
+                                Text("Transaction ID: ${alert.transactionId}", style: const TextStyle(color: Colors.white70)),
+                                const SizedBox(height: 4),
+                                Text("Amount: GHS${alert.amount}", style: const TextStyle(color: Colors.white70)),
+                                const SizedBox(height: 4),
+                                Text("Confidence: ${(alert.fraudProbability * 100).toStringAsFixed(1)}%", style: const TextStyle(color: Colors.white70)),
                               ],
                             ),
                           ),
@@ -396,99 +247,3 @@ class _AlertManagementPageState extends State<AlertManagementPage> {
     );
   }
 }
-=======
-            const SizedBox(height: 16),
-
-            // Alert List
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredAlerts.length,
-                itemBuilder: (context, index) {
-                  final alert = filteredAlerts[index];
-                  return Card(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: ListTile(
-                      title: Text(alert['type']!),
-                      subtitle: Text('${alert['date']} • ${alert['time']}\nStatus: ${alert['status']}'),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.more_vert),
-                        onPressed: () {
-                          _showAlertActions(context, alert['id']!);
-                        },
-                      ),
-                      onTap: () {
-                        _showAlertDetails(context, alert);
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Show alert actions (resolve, dismiss)
-  void _showAlertActions(BuildContext context, String alertId) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.check_circle),
-              title: const Text('Resolve Alert'),
-              onTap: () {
-                resolveAlert(alertId);
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.delete),
-              title: const Text('Dismiss Alert'),
-              onTap: () {
-                dismissAlert(alertId);
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Show alert details
-  void _showAlertDetails(BuildContext context, Map<String, String> alert) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(alert['type']!),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Date: ${alert['date']}'),
-              Text('Time: ${alert['time']}'),
-              Text('Status: ${alert['status']}'),
-              const SizedBox(height: 16),
-              Text('Description: ${alert['description']}'),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Close'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
->>>>>>> 002338a766dcd3a3ddd3168266534321a68e063f
