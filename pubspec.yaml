@@ -1,89 +1,76 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:fraud_dashboard/dashboard.dart';
-import 'package:fraud_dashboard/login_page.dart';
-import 'package:fraud_dashboard/register_page.dart';
-import 'package:fraud_dashboard/landing_page.dart';
-import 'package:fraud_dashboard/transaction_monitoring_page.dart';
-import 'package:fraud_dashboard/alert_management.dart';
+name: fraud_dashboard
+description: A new Flutter project.
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.5 <3.0.0'
+
+
+dependencies:
   
-  try {
-    // Load environment variables
-    await dotenv.load(fileName: ".env").catchError((error) {
-      debugPrint("Error loading .env file: $error");
-      return dotenv.load(fileName: "assets/.env");
-    });
+  flutter:
+    sdk: flutter
+  csv: ^5.1.1
+  excel: ^2.1.0
+  pdf: ^3.10.4
+  printing: ^5.12.0
+  path_provider: ^2.1.1
+  share_plus: ^7.2.1
 
-    runApp(const MyApp());
-  } catch (error, stackTrace) {
-    debugPrint("Initialization error: $error");
-    debugPrint(stackTrace.toString());
-    runApp(const InitializationErrorScreen());
-  }
-}
+  flutter_secure_storage: ^8.0.0
+  http: ^0.13.6
+  flutter_dotenv: ^5.0.2
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.5
+  fl_chart: ^0.65.0
+  
+  web_socket_channel: ^2.4.0  # For WebSocket connections
+  
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
 
-  @override
-  Widget build(BuildContext context) {
-    final apiUrl = dotenv.env['API_URL'] ?? 'http://10.0.2.2:3000';
-    debugPrint('API URL: $apiUrl');
 
-    return MaterialApp(
-      title: 'FraudSense',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      theme: ThemeData.dark().copyWith(
-        colorScheme: const ColorScheme.dark(
-          primary: Colors.blueAccent,
-          secondary: Colors.cyanAccent,
-        ),
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const LandingPage(),
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
-        '/dashboard': (context) => const DashBoard(),
-        '/transaction-monitoring': (context) => const TransactionMonitoringPage(),
-        '/alert-management': (context) => const AlertManagementPage(),
-      },
-    );
-  }
-}
+flutter:
 
-class InitializationErrorScreen extends StatelessWidget {
-  const InitializationErrorScreen({super.key});
+  uses-material-design: true
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color(0xFF1F2029),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.red),
-              const SizedBox(height: 20),
-              const Text('Initialization Error', style: TextStyle(fontSize: 24, color: Colors.white)),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () => main(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                ),
-                child: const Text('Retry', style: TextStyle(color: Colors.white)),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+  assets:
+    - assets/images/
+    - assets/svg/
+    - assets/.env
+    
+    
+
+  fonts:
+    - family: IBMPlexSans
+   
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+      
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 900
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/IBMPlexSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/IBMPlexSans-Thin.ttf
+          weight: 100  
+  
