@@ -6,9 +6,10 @@ import psycopg2
 
 # === PostgreSQL Setup ===
 conn_postgres = psycopg2.connect(
-    dbname="fraudsense_db",
-    user="fraud_admin",
-    password="newpassword",
+    
+    dbname="Fraudsense_DB",
+    user="postgres",
+    password="256Jackie?",
     host="localhost"
     port="5432"
     
