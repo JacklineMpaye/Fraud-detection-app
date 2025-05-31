@@ -1,7 +1,7 @@
-### FraudSense: Mobile Money Fraud Detection System
+#### FraudSense: Mobile Money Fraud Detection System
 FraudSense is a real-time fraud detection system tailored to the mobile money ecosystem. By integrating advanced streaming, machine learning, and full-stack technologies, FraudSense enables proactive identification of suspicious transactions to enhance financial security in digital payments.
 
-##📁 Project Structure
+### 📁 Project Structure
 Backend/: Python-based backend services
 
 kafka/: Kafka producer and consumer scripts
@@ -24,7 +24,7 @@ test/: Unit and integration test scripts
 
 pubspec.lock: Flutter dependency lockfile
 
-##🔑 Key Features
+### 🔑 Key Features
 Real-time fraud prediction using Kafka streams
 
 Anomaly detection powered by XGBoost
@@ -37,7 +37,7 @@ Flutter web dashboard with live alert updates
 
 Deployment-ready on DigitalOcean
 
-💻 Technology Stack
+### 💻 Technology Stack
 Backend: Python, FastAPI, Kafka, XGBoost
 
 Frontend: Flutter Web
@@ -46,7 +46,7 @@ Database: PostgreSQL
 
 DevOps: DigitalOcean, systemctl, SCP
 
-##🚀 Getting Started
+### 🚀 Getting Started
 #1. Clone Repository
 bash
 Copy
@@ -114,14 +114,15 @@ Copy
 Edit
 flutter build web
 scp -r build/web/* user@your_ip:/var/www/html/
-📊 Usage
+
+### 📊 Usage
 Monitor real-time predictions through the web dashboard
 
 Alerts are flagged when fraud probability > 0.7
 
 Review historical trends and flagged transactions
 
-##🤝 Contributing
+### 🤝 Contributing
 To contribute:
 
 Fork the repository
@@ -132,7 +133,7 @@ Make your changes and commit
 
 Open a pull request with detailed descriptions
 
-##🌱 Future Recommendations
+### 🌱 Future Recommendations
 Integrate with Telecom APIs: Collaborate with mobile money providers to access real transaction data and improve model accuracy.
 
 Deploy on Real-Time Pipelines: Move from testing environments to production by running the system on live transaction streams.
@@ -145,5 +146,5 @@ Enable Feedback Loops: Let human reviewers validate alerts and feed corrections 
 
 
 
-##🙏 Acknowledgements
+### 🙏 Acknowledgements
 Special thanks to the Ashesi University Capstone Program and all technical mentors involved. This project was built with inspiration from real-world financial security needs and the desire to reduce digital payment fraud in Africa.
