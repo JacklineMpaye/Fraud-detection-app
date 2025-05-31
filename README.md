@@ -1,150 +1,144 @@
-#### FraudSense: Mobile Money Fraud Detection System
-FraudSense is a real-time fraud detection system tailored to the mobile money ecosystem. By integrating advanced streaming, machine learning, and full-stack technologies, FraudSense enables proactive identification of suspicious transactions to enhance financial security in digital payments.
+# 🚨 FraudSense – Mobile Money Fraud Detection System
 
-### 📁 Project Structure
-Backend/: Python-based backend services
+FraudSense is a real-time fraud detection system tailored to the mobile money ecosystem. It integrates Apache Kafka, XGBoost, FastAPI, PostgreSQL, and a Flutter web dashboard to help banks and regulators identify fraudulent transactions as they happen.
 
-kafka/: Kafka producer and consumer scripts
+---
 
-model_serving/: Model serialization and loading logic
+## 📁 Project Structure
 
-venv/: Virtual environment for dependencies
+- **Backend/** – Python-based backend logic  
+  - `kafka/` – Kafka producer & consumer  
+  - `model_serving/` – Model loading and prediction  
+  - `venv/` – Python virtual environment  
+  - `requirements.txt` – Python package dependencies  
+  - `test.json` – Sample transaction data  
 
-requirements.txt: Python package dependencies
+- **lib/** – Flutter app logic and UI components  
+- **assets/** – Images and design assets  
+- **android/**, **ios/**, **macos/**, **linux/**, **web/** – Platform-specific Flutter targets  
+- **test/** – Testing files  
+- **pubspec.lock** – Flutter dependency lock file  
 
-test.json: Sample transaction data for testing
+---
 
-lib/: Flutter frontend logic and UI components
+## 🔑 Key Features
 
-assets/: Fonts, images, and design elements
+- Real-time fraud detection using Kafka streaming  
+- ML model powered by XGBoost  
+- REST API built with FastAPI  
+- Flutter web dashboard for alerts  
+- PostgreSQL for alert storage and reporting  
+- Deployment-ready on DigitalOcean  
 
-android/, ios/, macos/, linux/, web/: Platform-specific build targets
+---
 
-test/: Unit and integration test scripts
+## 💻 Technology Stack
 
-pubspec.lock: Flutter dependency lockfile
+- **Backend**: Python, FastAPI, Kafka, XGBoost  
+- **Frontend**: Flutter (Web)  
+- **Database**: PostgreSQL  
+- **DevOps**: DigitalOcean, SCP, pm2/systemctl  
 
-### 🔑 Key Features
-Real-time fraud prediction using Kafka streams
+---
 
-Anomaly detection powered by XGBoost
+## 🚀 Getting Started
 
-RESTful API with FastAPI
-
-Secure PostgreSQL database integration
-
-Flutter web dashboard with live alert updates
-
-Deployment-ready on DigitalOcean
-
-### 💻 Technology Stack
-Backend: Python, FastAPI, Kafka, XGBoost
-
-Frontend: Flutter Web
-
-Database: PostgreSQL
-
-DevOps: DigitalOcean, systemctl, SCP
-
-### 🚀 Getting Started
-#1. Clone Repository
-bash
-Copy
-Edit
+### 📦 1. Clone the Repository
+```bash
 git clone https://github.com/JacklineMpaye/Fraud-detection-app.git
 cd Fraud-detection-app
-#2. Backend Setup
-bash
-Copy
-Edit
+```
+
+---
+
+## 🛠️ Backend Setup
+
+```bash
 cd Backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 uvicorn fastapi_app:app --reload
-#3. PostgreSQL Setup
-Create a new database:
+```
 
-bash
-Copy
-Edit
+---
+
+## 🗄️ PostgreSQL Setup
+
+Create a new database:
+```bash
 psql -U postgres
 CREATE DATABASE fraudsense_db;
-Then, restore schema:
+```
 
-bash
-Copy
-Edit
+Restore the schema:
+```bash
 psql -U postgres -d fraudsense_db < fraudsense_backup.sql
-#4. Kafka Setup
-Start Zookeeper and Kafka:
+```
 
-bash
-Copy
-Edit
+---
+
+## 📡 Kafka Setup
+
+Start Zookeeper and Kafka:
+```bash
 ./bin/zookeeper-server-start.sh -daemon ./config/zookeeper.properties
 ./bin/kafka-server-start.sh -daemon ./config/server.properties
+```
 
+---
 
-#5. Kafka Producer & Consumer
-bash
-Copy
-Edit
+## 🧩 Kafka Producer & Consumer
+
+```bash
 cd Backend/kafka
 python producer.py
 python consumer.py
-#6. Frontend (Flutter Web)
-bash
-Copy
-Edit
+```
+
+---
+
+## 🖥️ Frontend (Flutter Web)
+
+```bash
 cd Flutter-App
 flutter pub get
 flutter run -d chrome
-Update .env with your API base URL (e.g., your DigitalOcean IP).
+```
 
-#7. Deployment (DigitalOcean)
-Upload backend files to your droplet
+Update the `.env` file with your API base URL (e.g., your DigitalOcean IP address).
 
-Run FastAPI with pm2 or systemctl
+---
 
-Build and upload Flutter frontend:
+## 📊 Usage
 
-bash
-Copy
-Edit
-flutter build web
-scp -r build/web/* user@your_ip:/var/www/html/
+- Monitor predictions in real time from the Flutter dashboard  
+- Alerts are raised when the fraud probability exceeds `0.7`  
+- Analyze flagged transactions and trends via the web interface  
 
-### 📊 Usage
-Monitor real-time predictions through the web dashboard
+---
 
-Alerts are flagged when fraud probability > 0.7
+## 🔮 Future Recommendations
 
-Review historical trends and flagged transactions
+- **Integrate with Telecom APIs** – Access real transaction data  
+- **Deploy on Real-Time Pipelines** – Enable live fraud detection  
+- **Add Adaptive Learning** – Allow model to learn from new patterns  
+- **Implement Risk Scoring** – Prioritize alerts by severity  
+- **Enable Feedback Loops** – Improve model through analyst feedback  
 
-### 🤝 Contributing
+---
+
+## 🤝 Contributing
+
 To contribute:
 
-Fork the repository
+1. Fork the repository  
+2. Create a feature branch  
+3. Commit your changes  
+4. Open a pull request with a clear description  
 
-Create a new feature branch
+---
 
-Make your changes and commit
+## 🙏 Acknowledgements
 
-Open a pull request with detailed descriptions
-
-### 🌱 Future Recommendations
-Integrate with Telecom APIs: Collaborate with mobile money providers to access real transaction data and improve model accuracy.
-
-Deploy on Real-Time Pipelines: Move from testing environments to production by running the system on live transaction streams.
-
-Add Adaptive Learning: Equip the model to learn from new fraud patterns over time without manual retraining.
-
-Implement Risk Scoring: Rank fraud alerts by severity to help users prioritize the most critical threats.
-
-Enable Feedback Loops: Let human reviewers validate alerts and feed corrections back into the system for continuous improvement.
-
-
-
-### 🙏 Acknowledgements
-Special thanks to the Ashesi University Capstone Program and all technical mentors involved. This project was built with inspiration from real-world financial security needs and the desire to reduce digital payment fraud in Africa.
+Thanks to the Ashesi University Capstone Program and our mentors for their support. FraudSense was built to help fight mobile money fraud and protect digital transactions across Africa.
