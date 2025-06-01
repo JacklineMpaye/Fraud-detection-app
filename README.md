@@ -159,3 +159,4 @@ deep learning, this research advances financial security in mobile money ecosyst
 actionable insights for policymakers and service providers. The findings highlight neural 
 networks’ potential to safeguard transactions, foster trust, and sustain financial inclusion in 
 developing regions.  
+Key words: Mobile Money, Anomaly Detection, Neural Networks, LSTM (Long Short-Term Memory), Financial Inclusion, Fraud Detection
