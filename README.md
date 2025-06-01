@@ -142,3 +142,20 @@ To contribute:
 ## 🙏 Acknowledgements
 
 Thanks to the Ashesi University Capstone Program and our mentors for their support. FraudSense was built to help fight mobile money fraud and protect digital transactions across Africa.
+
+## Abstract
+The rapid adoption of mobile money in Sub-Saharan Africa, particularly Ghana, has bolstered 
+financial inclusion but also increased exposure to sophisticated fraud. Traditional detection 
+methods, such as rule-based systems, struggle to address evolving threats. This study proposes 
+a neural network-based anomaly detection system to enhance mobile money security by 
+identifying fraudulent transactions in real time. Using a Long Short-Term Memory (LSTM) 
+model trained on transactional data, the system achieves high accuracy (94.2%), precision 
+(89.7%), and recall (87.8%), outperforming conventional approaches. Designed as a micro 
+services architecture, it ensures scalability, real-time processing, and seamless integration with 
+existing platforms. Key features include real-time monitoring, anomaly detection, alert 
+management, and reporting. To address data imbalance, the Hybrid Cluster-Based Sampling 
+Technique (HCBST) improves model sensitivity and reduces false positives. By leveraging 
+deep learning, this research advances financial security in mobile money ecosystems, offering 
+actionable insights for policymakers and service providers. The findings highlight neural 
+networks’ potential to safeguard transactions, foster trust, and sustain financial inclusion in 
+developing regions.  
