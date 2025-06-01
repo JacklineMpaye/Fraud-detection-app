@@ -1,4 +1,4 @@
-# 🚨 FraudSense – Mobile Money Fraud Detection System
+# FraudSense – Mobile Money Fraud Detection System
 
 FraudSense is a real-time fraud detection system tailored to the mobile money ecosystem. It integrates Apache Kafka, XGBoost, FastAPI, PostgreSQL, and a Flutter web dashboard to help banks and regulators identify fraudulent transactions as they happen.
 
