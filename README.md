@@ -21,7 +21,7 @@ FraudSense is a real-time fraud detection system tailored to the mobile money ec
 
 ---
 
-## 🔑 Key Features
+##  Key Features
 
 - Real-time fraud detection using Kafka streaming  
 - ML model powered by XGBoost  
@@ -32,7 +32,7 @@ FraudSense is a real-time fraud detection system tailored to the mobile money ec
 
 ---
 
-## 💻 Technology Stack
+## Technology Stack
 
 - **Backend**: Python, FastAPI, Kafka, XGBoost  
 - **Frontend**: Flutter (Web)  
@@ -41,9 +41,9 @@ FraudSense is a real-time fraud detection system tailored to the mobile money ec
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 📦 1. Clone the Repository
+###  1. Clone the Repository
 ```bash
 git clone https://github.com/JacklineMpaye/Fraud-detection-app.git
 cd Fraud-detection-app
@@ -63,7 +63,7 @@ uvicorn fastapi_app:app --reload
 
 ---
 
-## 🗄️ PostgreSQL Setup
+##  PostgreSQL Setup
 
 Create a new database:
 ```bash
@@ -78,7 +78,7 @@ psql -U postgres -d fraudsense_db < fraudsense_backup.sql
 
 ---
 
-## 📡 Kafka Setup
+##  Kafka Setup
 
 Start Zookeeper and Kafka:
 ```bash
@@ -88,7 +88,7 @@ Start Zookeeper and Kafka:
 
 ---
 
-## 🧩 Kafka Producer & Consumer
+## Kafka Producer & Consumer
 
 ```bash
 cd Backend/kafka
@@ -98,7 +98,7 @@ python consumer.py
 
 ---
 
-## 🖥️ Frontend (Flutter Web)
+## Frontend (Flutter Web)
 
 ```bash
 cd Flutter-App
@@ -110,7 +110,7 @@ Update the `.env` file with your API base URL (e.g., your DigitalOcean IP addres
 
 ---
 
-## 📊 Usage
+##  Usage
 
 - Monitor predictions in real time from the Flutter dashboard  
 - Alerts are raised when the fraud probability exceeds `0.7`  
@@ -118,7 +118,7 @@ Update the `.env` file with your API base URL (e.g., your DigitalOcean IP addres
 
 ---
 
-## 🔮 Future Recommendations
+##  Future Recommendations
 
 - **Integrate with Telecom APIs** – Access real transaction data  
 - **Deploy on Real-Time Pipelines** – Enable live fraud detection  
@@ -128,7 +128,7 @@ Update the `.env` file with your API base URL (e.g., your DigitalOcean IP addres
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 To contribute:
 
@@ -139,7 +139,7 @@ To contribute:
 
 ---
 
-## 🙏 Acknowledgements
+##  Acknowledgements
 
 Thanks to the Ashesi University Capstone Program and our mentors for their support. FraudSense was built to help fight mobile money fraud and protect digital transactions across Africa.
 
